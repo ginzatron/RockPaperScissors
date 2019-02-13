@@ -1,7 +1,7 @@
 let userScore = 0;
-let compScore = 0;
+let computerScore = 0;
 let userScore_span = document.getElementById("user-score");
-let compScore_spac = document.getElementById("computer-score");
+let computerScore_span = document.getElementById("computer-score");
 let scoreBoard_div = document.querySelector(".score-board");
 let result_p = document.querySelector(".result > p");
 let rock_span = document.getElementById("r");
@@ -26,17 +26,16 @@ function win(userChoice, computerChoice) {
 	computerScore_span.innerHTML = computerScore;
 	const smallUserWord = "user".fontsize(3).sup();
 	const smallComputerWord = "comp".fontsize(3).sup();
-	result_div.innerHTML = `${convertToWord(userChoice)}${smallUserWord}  beats  ${convertToWord(computerChoice)}${smallComputerWord}  You Win!`;
+	result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord}  beats  ${convertToWord(computerChoice)}${smallComputerWord}  You Win!`;
 }
 
-function lose(){
+function lose(userChoice, computerChoice){
 	computerScore++;
 	userScore_span.innerHTML = userScore;
 	computerScore_span.innerHTML = computerScore;
 	const smallUserWord = "user".fontsize(3).sup();
 	const smallComputerWord = "comp".fontsize(3).sup();
-	result_div.innerHTML = `${convertToWord(userChoice)}${smallUserWord}  loses to  ${convertToWord(computerChoice)}${smallComputerWord}  You Lose!`;
-
+	result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord}  loses to  ${convertToWord(computerChoice)}${smallComputerWord}  You Lose!`;
 }
 
 function draw(){
@@ -65,15 +64,15 @@ function game(userChoice) {
 }
 
 function main() {
-	rock_div.addEventListener('click', function() {
+	rock_span.addEventListener('click', function() {
 	game("r");
 	});
 
-paper_div.addEventListener('click', function() {
+paper_span.addEventListener('click', function() {
 	game("p");
 	});
 
-scissors_div.addEventListener('click', function() {
+scissors_span.addEventListener('click', function() {
 	game("s");
 	});
 }

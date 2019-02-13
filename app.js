@@ -3,10 +3,10 @@ let compScore = 0;
 let userScore_span = document.getElementById("user-score");
 let compScore_spac = document.getElementById("computer-score");
 let scoreBoard_div = document.querySelector(".score-board");
-let result_div = document.querySelector(".result");
-let rock_div = document.getElementById("r");
-let paper_div = document.getElementById("p");
-let scissors_div = document.getElementById("s");
+let result_p = document.querySelector(".result > p");
+let rock_span = document.getElementById("r");
+let paper_span = document.getElementById("p");
+let scissors_span = document.getElementById("s");
 
 function getComputerChoice() {
 	let choices = ['r','p','s'];
@@ -14,14 +14,29 @@ function getComputerChoice() {
 	return choices[randomNumber];
 }
 
-function win(userChoice, computerChoice){
+function convertToWord(letter){
+	if (letter === "r") return 'rock';
+	if (letter === "p") return 'paper';
+	return 'scissors';
+}
+
+function win(userChoice, computerChoice) {
 	userScore++;
 	userScore_span.innerHTML = userScore;
 	computerScore_span.innerHTML = computerScore;
+	const smallUserWord = "user".fontsize(3).sup();
+	const smallComputerWord = "comp".fontsize(3).sup();
+	result_div.innerHTML = `${convertToWord(userChoice)}${smallUserWord}  beats  ${convertToWord(computerChoice)}${smallComputerWord}  You Win!`;
 }
 
 function lose(){
 	computerScore++;
+	userScore_span.innerHTML = userScore;
+	computerScore_span.innerHTML = computerScore;
+	const smallUserWord = "user".fontsize(3).sup();
+	const smallComputerWord = "comp".fontsize(3).sup();
+	result_div.innerHTML = `${convertToWord(userChoice)}${smallUserWord}  loses to  ${convertToWord(computerChoice)}${smallComputerWord}  You Lose!`;
+
 }
 
 function draw(){
@@ -39,12 +54,12 @@ function game(userChoice) {
 		case "rp":
 		case "ps":
 		case "sr":
-			lose();
+			lose(userChoice, computerChoice);
 			break;
 		case "rr":
 		case "pp":
 		case "ss":
-			draw();
+			draw(userChoice, computerChoice);
 			break;
 	}
 }
